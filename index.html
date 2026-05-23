@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ParkingWorld | End-to-End Autonomous Parking in 3DGS Simulation</title>
+  <meta name="description" content="ParkingWorld: correction-in-the-loop reinforcement learning for end-to-end autonomous parking in photorealistic 3D Gaussian Splatting simulation.">
+  <meta property="og:title" content="ParkingWorld">
+  <meta property="og:description" content="End-to-end autonomous parking reinforcement learning from human experience in 3DGS simulation.">
+  <meta property="og:image" content="assets/system_overview.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://Yu-Zhengcheng-11.github.io/ParkingWorld/">
+  <link rel="canonical" href="https://Yu-Zhengcheng-11.github.io/ParkingWorld/">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="scroll-meter" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="ParkingWorld home">
+      <span class="brand-mark"></span>
+      <span>ParkingWorld</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#real">Real Vehicle</a>
+      <a href="#bibtex">BibTeX</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <img class="hero-bg" src="assets/system_overview.png" alt="ParkingWorld system overview">
+      <div class="hero-shade"></div>
+      <div class="hero-content reveal">
+        <p class="eyebrow">3DGS Simulation + Human Experience + End-to-End RL</p>
+        <h1>ParkingWorld</h1>
+        <p class="subtitle">End-to-End Autonomous Parking Reinforcement Learning from Human Experience in 3DGS Simulation</p>
+        <p class="authors">Zhengcheng Yu, Changze Li, Haoran Liu, Tong Qin</p>
+        <div class="hero-actions">
+          <a class="button primary" href="assets/paper.pdf">Paper PDF</a>
+          <a class="button" href="https://github.com/Yu-Zhengcheng-11/ParkingWorld">Code</a>
+        </div>
+      </div>
+      <div class="hero-stats reveal" aria-label="Key results">
+        <div>
+          <span class="metric" data-count="88">0</span><span class="unit">%</span>
+          <p>Simulation PSR</p>
+        </div>
+        <div>
+          <span class="metric" data-count="80">0</span><span class="unit">%</span>
+          <p>Real-Vehicle PSR</p>
+        </div>
+        <div>
+          <span class="metric" data-count="239">0</span>
+          <p>Standard Slots</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section intro reveal">
+      <div class="section-heading">
+        <p class="eyebrow">What It Solves</p>
+        <h2>Learning to park from corrected mistakes</h2>
+      </div>
+      <p class="lead">
+        ParkingWorld trains an end-to-end autonomous parking policy inside photorealistic 3D Gaussian Splatting parking scenes.
+        Instead of relying only on ordinary RL rollouts or large expert datasets, the system couples what the autonomous policy did wrong with how humans corrected the failure.
+        This correction-in-the-loop replay design makes training more sample-efficient, safer, and more transferable to real vehicles.
+      </p>
+      <div class="feature-strip">
+        <span>Photorealistic 3DGS scenes</span>
+        <span>BEV perception-policy network</span>
+        <span>Rollback correction replay</span>
+        <span>Real Changan CS55 deployment</span>
+      </div>
+    </section>
+
+    <section class="section visual-band reveal" id="method">
+      <div class="section-heading">
+        <p class="eyebrow">Framework</p>
+        <h2>Closed-loop training inside reconstructed parking worlds</h2>
+      </div>
+      <figure class="media-frame wide">
+        <img src="assets/3dgs_simulator.png" alt="Interactive 3DGS autonomous parking simulator">
+        <figcaption>Interactive ROS-based 3DGS simulator with rendering, dynamics, collision checking, rollback recording, and human-in-the-loop training.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section split">
+      <div class="copy reveal">
+        <p class="eyebrow">CIL-SERL</p>
+        <h2>Correction-in-the-loop sample-efficient RL</h2>
+        <p>
+          Human interventions are not simply mixed into a single demonstration buffer. ParkingWorld stores normal RL rollouts, human takeover segments, failed autonomous trajectories, and corrected rollback segments in coupled replay buffers. The policy therefore learns both the failure context and the corresponding recovery behavior.
+        </p>
+        <div class="mini-grid">
+          <div>
+            <strong>Detect</strong>
+            <span>failure-prone autonomous states</span>
+          </div>
+          <div>
+            <strong>Correct</strong>
+            <span>with human intervention and rollback</span>
+          </div>
+          <div>
+            <strong>Replay</strong>
+            <span>paired failure and correction samples</span>
+          </div>
+        </div>
+      </div>
+      <figure class="media-frame reveal">
+        <img src="assets/system_detail.png" alt="ParkingWorld end-to-end RL architecture">
+      </figure>
+    </section>
+
+    <section class="section visual-band reveal">
+      <div class="section-heading">
+        <p class="eyebrow">Why 3DGS</p>
+        <h2>Less domain gap, richer interaction</h2>
+      </div>
+      <figure class="media-frame wide">
+        <img src="assets/three_ways_comparison.png" alt="Comparison of CARLA LGSVL, real world, and 3DGS simulator training">
+        <figcaption>ParkingWorld uses reconstructed 3DGS scenes to bridge simulator training and real-world deployment.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section results" id="results">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Simulation Experiment</p>
+        <h2>Strong closed-loop performance on standard slots</h2>
+        <p>Training and testing are conducted on five reconstructed 3DGS parking scenes containing 239 standard parking slots. Each method is evaluated over 200 trials.</p>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Method</th>
+              <th>PSR (%) &uarr;</th>
+              <th>PCR (%) &darr;</th>
+              <th>PTR (%) &darr;</th>
+              <th>PBR (%) &darr;</th>
+              <th>NGS &darr;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Rule-based</td><td>RS Curve</td><td>31.0</td><td>0.0</td><td>69.0</td><td>0.0</td><td>1.6</td></tr>
+            <tr><td>Rule-based</td><td>Hybrid A*</td><td>55.5</td><td>0.0</td><td>45.5</td><td>0.0</td><td>14.9</td></tr>
+            <tr><td>End-to-end</td><td>ParkingE2E</td><td>34.0</td><td>46.5</td><td>0.0</td><td>19.5</td><td>2.6</td></tr>
+            <tr><td>End-to-end</td><td>REAP-PPO</td><td>46.0</td><td>39.0</td><td>15.0</td><td>3.0</td><td>26.7</td></tr>
+            <tr><td>End-to-end</td><td>REAP-SAC</td><td>68.5</td><td>22.0</td><td>9.5</td><td>0.0</td><td>17.5</td></tr>
+            <tr class="highlight"><td>End-to-end</td><td>ParkingWorld</td><td>88.0</td><td>4.0</td><td>8.0</td><td>0.0</td><td>13.2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figure class="media-frame wide reveal">
+        <img src="assets/parking_trajectory_visualization.png" alt="ParkingWorld trajectory visualization across different scenes">
+      </figure>
+    </section>
+
+    <section class="section split real" id="real">
+      <div class="copy reveal">
+        <p class="eyebrow">Real-World Experiment</p>
+        <h2>Deployed on a Changan CS55</h2>
+        <p>
+          Four surround-view fisheye cameras stream images at 5 Hz to a dedicated computer, where ParkingWorld predicts target speed and steering commands. The commands are rolled out into a short-horizon kinematic trajectory and tracked by an onboard NUC using sampled NMPC at 50 Hz.
+        </p>
+        <div class="score-row">
+          <div><strong>80.0%</strong><span>real PSR</span></div>
+          <div><strong>5.0%</strong><span>near-collision rate</span></div>
+          <div><strong>0.0%</strong><span>boundary crossing</span></div>
+        </div>
+      </div>
+      <figure class="media-frame reveal">
+        <img src="assets/real_car_control.png" alt="Real vehicle deployment framework for ParkingWorld">
+      </figure>
+    </section>
+
+    <section class="section results compact">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Real-Vehicle Comparison</p>
+        <h2>Robust transfer beyond simulation</h2>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Method</th>
+              <th>PSR (%) &uarr;</th>
+              <th>PCR (%) &darr;</th>
+              <th>PTR (%) &darr;</th>
+              <th>PBR (%) &darr;</th>
+              <th>NGS &darr;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Rule-based</td><td>RS Curve</td><td>15.0</td><td>0.0</td><td>85.0</td><td>0.0</td><td>6.5</td></tr>
+            <tr><td>Rule-based</td><td>Hybrid A*</td><td>35.0</td><td>0.0</td><td>65.0</td><td>0.0</td><td>29.7</td></tr>
+            <tr><td>End-to-end</td><td>ParkingE2E</td><td>30.0</td><td>45.0</td><td>0.0</td><td>25.0</td><td>8.5</td></tr>
+            <tr><td>End-to-end</td><td>REAP-PPO</td><td>40.0</td><td>2.0</td><td>35.0</td><td>5.0</td><td>33.8</td></tr>
+            <tr><td>End-to-end</td><td>REAP-SAC</td><td>60.0</td><td>15.0</td><td>25.0</td><td>0.0</td><td>26.6</td></tr>
+            <tr class="highlight"><td>End-to-end</td><td>ParkingWorld</td><td>80.0</td><td>5.0</td><td>15.0</td><td>0.0</td><td>22.1</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section bibtex reveal" id="bibtex">
+      <div class="section-heading">
+        <p class="eyebrow">Citation</p>
+        <h2>BibTeX</h2>
+      </div>
+      <pre><code>@article{parkingworld2026,
+  title   = {ParkingWorld: End-to-End Autonomous Parking Reinforcement Learning from Human Experience in 3DGS Simulation},
+  author  = {Yu, Zhengcheng and Li, Changze and Liu, Haoran and Qin, Tong},
+  journal = {IEEE Robotics and Automation Letters},
+  year    = {2026}
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>ParkingWorld project page. Built for GitHub Pages at <a href="https://Yu-Zhengcheng-11.github.io/ParkingWorld/">Yu-Zhengcheng-11.github.io/ParkingWorld</a>.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
