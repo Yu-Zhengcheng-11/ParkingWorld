@@ -510,13 +510,15 @@ code {
   justify-content: center;
   width: 28px;
   height: 28px;
+  padding: 2px;
+  border-radius: 6px;
   color: var(--white);
-  background: transparent;
+  background: var(--white);
 }
 
 .contact-icon img {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
 }
 
