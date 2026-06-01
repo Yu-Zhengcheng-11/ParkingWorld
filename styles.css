@@ -494,11 +494,11 @@ code {
 
 .contact-card {
   display: grid;
-  grid-template-columns: 52px minmax(0, 1fr);
-  gap: 14px;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
   align-items: center;
-  min-height: 118px;
-  padding: 18px;
+  min-height: 86px;
+  padding: 16px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.08);
@@ -508,23 +508,16 @@ code {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 8px;
+  width: 28px;
+  height: 28px;
   color: var(--white);
-  background: rgba(255, 255, 255, 0.12);
+  background: transparent;
 }
 
-.contact-icon svg {
-  width: 34px;
-  height: 34px;
-  fill: currentColor;
-}
-
-.text-icon {
-  font-size: 15px;
-  font-weight: 950;
-  letter-spacing: 0.03em;
+.contact-icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
 }
 
 .contact-card strong,
@@ -543,22 +536,6 @@ code {
   font-size: 14px;
   font-style: normal;
   overflow-wrap: anywhere;
-}
-
-.wechat .contact-icon {
-  background: #07c160;
-}
-
-.rednote .contact-icon {
-  background: #ff2442;
-}
-
-.bilibili .contact-icon {
-  background: #00aeec;
-}
-
-.csdn .contact-icon {
-  background: #c71d23;
 }
 
 .reveal {
