@@ -455,6 +455,112 @@ code {
   color: var(--mint);
 }
 
+.contact-band {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto 72px;
+  padding: 34px;
+  border: 1px solid rgba(7, 16, 15, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(7, 16, 15, 0.96), rgba(16, 24, 23, 0.9)),
+    var(--ink);
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.contact-copy {
+  max-width: 740px;
+}
+
+.contact-copy h2 {
+  margin: 0;
+  font-size: clamp(36px, 7vw, 74px);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.contact-copy p:not(.eyebrow) {
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 18px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.contact-card {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  min-height: 118px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.contact-icon svg {
+  width: 34px;
+  height: 34px;
+  fill: currentColor;
+}
+
+.text-icon {
+  font-size: 15px;
+  font-weight: 950;
+  letter-spacing: 0.03em;
+}
+
+.contact-card strong,
+.contact-card em {
+  display: block;
+}
+
+.contact-card strong {
+  font-size: 17px;
+  line-height: 1.1;
+}
+
+.contact-card em {
+  margin-top: 7px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 14px;
+  font-style: normal;
+  overflow-wrap: anywhere;
+}
+
+.wechat .contact-icon {
+  background: #07c160;
+}
+
+.rednote .contact-icon {
+  background: #ff2442;
+}
+
+.bilibili .contact-icon {
+  background: #00aeec;
+}
+
+.csdn .contact-icon {
+  background: #c71d23;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -495,7 +601,8 @@ code {
 
   .split,
   .mini-grid,
-  .score-row {
+  .score-row,
+  .contact-grid {
     grid-template-columns: 1fr;
   }
 
@@ -506,5 +613,10 @@ code {
   .visual-band {
     padding-top: 72px;
     padding-bottom: 72px;
+  }
+
+  .contact-band {
+    margin-bottom: 48px;
+    padding: 24px;
   }
 }
